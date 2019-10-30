@@ -156,7 +156,7 @@ if
 then
 	wget -c https://nlnetlabs.nl/downloads/unbound/unbound-1.9.4.tar.gz    && \
 		tar xvzf unbound-1.9.4.tar.gz                                        && \
-		rm -f unbound-1.9.4                                                  && \
+		rm -f unbound-1.9.4.tar.gz                                           && \
 		cd unbound-1.9.4 && ./configure --prefix=$BUILD_DIR/.apt/usr && make
 else
 	cd unbound-1.9.4
