@@ -188,7 +188,7 @@ then
 	wget -c https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.7.tar.xz                                                   && \
 		tar xJf gnutls-3.6.7.tar.xz                                                                                              && \
 		rm -f gnutls-3.6.7.tar.xz                                                                                                && \
-		cd gnutls-3.6.7 && ./configure --prefix=$BUILD_DIR/.apt/usr --enable-guile GUILE="$BUILD_DIR/.apt/usr/bin/guile" && make
+		cd gnutls-3.6.7 && ./configure --prefix=$BUILD_DIR/.apt/usr --enable-guile GUILE="$BUILD_DIR/.apt/usr/bin/guile" GUILE_SNARF="$BUILD_DIR/.apt/usr/bin/guile-snarf" GUILE_CONFIG="$BUILD_DIR/.apt/usr/bin/guile-config" GUILE_TOOLS="$BUILD_DIR/.apt/usr/bin/guile-tools" GUILE_SITE="$BUILD_DIR/.apt/usr/share/guile/site" && make
 else
 	cd gnutls-3.6.7
 fi
