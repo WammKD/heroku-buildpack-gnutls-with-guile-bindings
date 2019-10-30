@@ -150,6 +150,21 @@ fi
 make install && cd ..
 
 
+topic "Installing Unbound"
+if
+	[ ! -d "$BUILDS_CACHE_DIR/unbound-1.9.4" ]
+then
+	wget -c https://nlnetlabs.nl/downloads/unbound/unbound-1.9.4.tar.gz    && \
+		tar xvzf unbound-1.9.4.tar.gz                                        && \
+		rm -f unbound-1.9.4                                                  && \
+		cd unbound-1.9.4 && ./configure --prefix=$BUILD_DIR/.apt/usr && make
+else
+	cd unbound-1.9.4
+fi
+
+make install && cd ..
+
+
 topic "Installing GnuTLS"
 if
 	[ ! -d "$BUILDS_CACHE_DIR/gnutls-3.6.7" ]
