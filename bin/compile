@@ -170,7 +170,7 @@ if
 	[ ! -d "$BUILDS_CACHE_DIR/autogen-5.18.7" ]
 then
 	wget -c ftp://ftp.gnu.org/gnu/autogen/autogen-5.18.7.tar.xz             && \
-		tar xJf autogen-5.18.7                                                && \
+		tar xJf autogen-5.18.7.tar.xz                                         && \
 		rm -f autogen-5.18.7.tar.xz                                           && \
 		cd autogen-5.18.7 && ./configure --prefix=$BUILD_DIR/.apt/usr && make
 else
