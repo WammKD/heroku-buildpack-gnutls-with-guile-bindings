@@ -72,30 +72,24 @@ topic "Installing Nettle"
 if
 	[ ! -d "$BUILDS_CACHE_DIR/nettle-$NETTLE_VERSION" ]
 then
-	wget -c https://ftp.gnu.org/gnu/nettle/nettle-$NETTLE_VERSION.tar.gz            && \
-		tar xvzf nettle-$NETTLE_VERSION.tar.gz                                        && \
-		rm -f nettle-$NETTLE_VERSION.tar.gz                                           && \
-		cd nettle-$NETTLE_VERSION && ./configure --prefix=$BUILD_DIR/.apt/usr && make
-else
-	cd nettle-$NETTLE_VERSION
+	wget -c https://ftp.gnu.org/gnu/nettle/nettle-$NETTLE_VERSION.tar.gz && \
+		tar xvzf nettle-$NETTLE_VERSION.tar.gz                             && \
+		rm -f nettle-$NETTLE_VERSION.tar.gz
 fi
 
-make install && cd ..
+cd nettle-$NETTLE_VERSION && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
 
 
 topic "Installing libtasn1"
 if
 	[ ! -d "$BUILDS_CACHE_DIR/libtasn1-$LIBTASN1_VERSION" ]
 then
-	wget -c https://ftp.gnu.org/gnu/libtasn1/libtasn1-$LIBTASN1_VERSION.tar.gz          && \
-		tar xvzf libtasn1-$LIBTASN1_VERSION.tar.gz                                        && \
-		rm -f libtasn1-$LIBTASN1_VERSION.tar.gz                                           && \
-		cd libtasn1-$LIBTASN1_VERSION && ./configure --prefix=$BUILD_DIR/.apt/usr && make
-else
-	cd libtasn1-$LIBTASN1_VERSION
+	wget -c https://ftp.gnu.org/gnu/libtasn1/libtasn1-$LIBTASN1_VERSION.tar.gz && \
+		tar xvzf libtasn1-$LIBTASN1_VERSION.tar.gz                               && \
+		rm -f libtasn1-$LIBTASN1_VERSION.tar.gz
 fi
 
-make install && cd ..
+cd libtasn1-$LIBTASN1_VERSION && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
 
 
 topic "Installing p11-kit"
@@ -104,43 +98,34 @@ if
 then
 	wget -c https://github.com/p11-glue/p11-kit/releases/download/$P11_KIT_VERSION/p11-kit-$P11_KIT_VERSION.tar.gz && \
 		tar xvzf p11-kit-$P11_KIT_VERSION.tar.gz                                                                     && \
-		rm -f p11-kit-$P11_KIT_VERSION.tar.gz                                                                        && \
-		cd p11-kit-$P11_KIT_VERSION && ./configure --prefix=$BUILD_DIR/.apt/usr && make
-else
-	cd p11-kit-$P11_KIT_VERSION
+		rm -f p11-kit-$P11_KIT_VERSION.tar.gz
 fi
 
-make install && cd ..
+cd p11-kit-$P11_KIT_VERSION && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
 
 
 topic "Installing Unbound"
 if
 	[ ! -d "$BUILDS_CACHE_DIR/unbound-1.9.4" ]
 then
-	wget -c https://nlnetlabs.nl/downloads/unbound/unbound-1.9.4.tar.gz    && \
-		tar xvzf unbound-1.9.4.tar.gz                                        && \
-		rm -f unbound-1.9.4.tar.gz                                           && \
-		cd unbound-1.9.4 && ./configure --prefix=$BUILD_DIR/.apt/usr && make
-else
-	cd unbound-1.9.4
+	wget -c https://nlnetlabs.nl/downloads/unbound/unbound-1.9.4.tar.gz && \
+		tar xvzf unbound-1.9.4.tar.gz                                     && \
+		rm -f unbound-1.9.4.tar.gz
 fi
 
-make install && cd ..
+cd unbound-1.9.4 && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
 
 
-# topic "Installing Autogen"
-# if
-# 	[ ! -d "$BUILDS_CACHE_DIR/autogen-5.18.7" ]
-# then
-# 	wget -c ftp://ftp.gnu.org/gnu/autogen/autogen-5.18.7.tar.xz             && \
-# 		tar xJf autogen-5.18.7.tar.xz                                         && \
-# 		rm -f autogen-5.18.7.tar.xz                                           && \
-# 		cd autogen-5.18.7 && ./configure --prefix=$BUILD_DIR/.apt/usr && make
-# else
-# 	cd autogen-5.18.7
-# fi
+topic "Installing Autogen"
+if
+	[ ! -d "$BUILDS_CACHE_DIR/autogen-5.18.7" ]
+then
+	wget -c ftp://ftp.gnu.org/gnu/autogen/autogen-5.18.7.tar.xz             && \
+		tar xJf autogen-5.18.7.tar.xz                                         && \
+		rm -f autogen-5.18.7.tar.xz
+fi
 
-# make install && cd ..
+cd autogen-5.18.7 && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
 #https://trac.macports.org/ticket/54112
 
 
@@ -148,12 +133,9 @@ topic "Installing GnuTLS"
 if
 	[ ! -d "$BUILDS_CACHE_DIR/gnutls-3.6.7" ]
 then
-	wget -c https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.7.tar.xz                                                   && \
-		tar xJf gnutls-3.6.7.tar.xz                                                                                              && \
-		rm -f gnutls-3.6.7.tar.xz                                                                                                && \
-		cd gnutls-3.6.7 && ./configure --prefix=$BUILD_DIR/.apt/usr --enable-guile GUILE="$BUILD_DIR/.apt/usr/bin/guile" GUILE_SNARF="$BUILD_DIR/.apt/usr/bin/guile-snarf" GUILE_CONFIG="$BUILD_DIR/.apt/usr/bin/guile-config" GUILE_TOOLS="$BUILD_DIR/.apt/usr/bin/guile-tools" GUILE_SITE="$BUILD_DIR/.apt/usr/share/guile/site" && make
-else
-	cd gnutls-3.6.7
+	wget -c https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.7.tar.xz && \
+		tar xJf gnutls-3.6.7.tar.xz                                            && \
+		rm -f gnutls-3.6.7.tar.xz
 fi
 
-make install && cd ..
+cd gnutls-3.6.7 && ./configure --prefix=$BUILD_DIR/.apt/usr --enable-guile GUILE="$BUILD_DIR/.apt/usr/bin/guile" && make && make install && cd ..
