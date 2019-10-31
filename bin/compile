@@ -116,18 +116,21 @@ fi
 cd unbound-1.9.4 && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
 
 
-topic "Installing Autogen"
-if
-	[ ! -d "$BUILDS_CACHE_DIR/autogen-5.18.7" ]
-then
-	wget -c ftp://ftp.gnu.org/gnu/autogen/autogen-5.18.7.tar.xz             && \
-		tar xJf autogen-5.18.7.tar.xz                                         && \
-		rm -f autogen-5.18.7.tar.xz
-fi
+# topic "Installing Autogen"
+# if
+# 	[ ! -d "$BUILDS_CACHE_DIR/autogen-5.18.7" ]
+# then
+# 	wget -c ftp://ftp.gnu.org/gnu/autogen/autogen-5.18.7.tar.xz             && \
+# 		tar xJf autogen-5.18.7.tar.xz                                         && \
+# 		rm -f autogen-5.18.7.tar.xz
+# fi
 
-cd autogen-5.18.7 && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
+# cd autogen-5.18.7 && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
 #https://trac.macports.org/ticket/54112
 
+
+topic "INCLUDE"
+ls usr/include/linux/ | grep std | indent
 
 topic "Installing GnuTLS"
 if
