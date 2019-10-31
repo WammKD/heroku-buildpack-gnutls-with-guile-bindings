@@ -129,9 +129,6 @@ cd unbound-1.9.4 && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make ins
 #https://trac.macports.org/ticket/54112
 
 
-topic "INCLUDE"
-ls $BUILD_DIR/.apt/usr/include/linux/ | grep std | indent
-
 topic "Installing GnuTLS"
 if
 	[ ! -d "$BUILDS_CACHE_DIR/gnutls-3.6.7" ]
