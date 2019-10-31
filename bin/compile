@@ -130,7 +130,7 @@ cd unbound-1.9.4 && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make ins
 
 
 topic "INCLUDE"
-ls usr/include/linux/ | grep std | indent
+ls $BUILD_DIR/.apt/usr/include/linux/ | grep std | indent
 
 topic "Installing GnuTLS"
 if
