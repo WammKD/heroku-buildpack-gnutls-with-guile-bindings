@@ -66,54 +66,37 @@ export | grep -E -e ' (PATH|LD_LIBRARY_PATH|LIBRARY_PATH|INCLUDE_PATH|CPATH|CPPP
 
 
 
-mkdir -p $BUILDS_CACHE_DIR && cd $BUILDS_CACHE_DIR
+cd /tmp
 
 topic "Installing Nettle"
-if
-	[ ! -d "$BUILDS_CACHE_DIR/nettle-$NETTLE_VERSION" ]
-then
-	wget -c https://ftp.gnu.org/gnu/nettle/nettle-$NETTLE_VERSION.tar.gz && \
-		tar xvzf nettle-$NETTLE_VERSION.tar.gz                             && \
-		rm -f nettle-$NETTLE_VERSION.tar.gz
-fi
-
-cd nettle-$NETTLE_VERSION && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
+wget -c https://ftp.gnu.org/gnu/nettle/nettle-$NETTLE_VERSION.tar.gz && \
+	tar xvzf nettle-$NETTLE_VERSION.tar.gz                             && \
+	rm -f nettle-$NETTLE_VERSION.tar.gz                                && \
+	cd nettle-$NETTLE_VERSION                                          && \
+	./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
 
 
 topic "Installing libtasn1"
-if
-	[ ! -d "$BUILDS_CACHE_DIR/libtasn1-$LIBTASN1_VERSION" ]
-then
-	wget -c https://ftp.gnu.org/gnu/libtasn1/libtasn1-$LIBTASN1_VERSION.tar.gz && \
-		tar xvzf libtasn1-$LIBTASN1_VERSION.tar.gz                               && \
-		rm -f libtasn1-$LIBTASN1_VERSION.tar.gz
-fi
-
-cd libtasn1-$LIBTASN1_VERSION && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
+wget -c https://ftp.gnu.org/gnu/libtasn1/libtasn1-$LIBTASN1_VERSION.tar.gz  && \
+	tar xvzf libtasn1-$LIBTASN1_VERSION.tar.gz                                && \
+	rm -f libtasn1-$LIBTASN1_VERSION.tar.gz                                   && \
+	cd libtasn1-$LIBTASN1_VERSION                                             && \
+	./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
 
 
 topic "Installing p11-kit"
-if
-	[ ! -d "$BUILDS_CACHE_DIR/p11-kit-$P11_KIT_VERSION" ]
-then
-	wget -c https://github.com/p11-glue/p11-kit/releases/download/$P11_KIT_VERSION/p11-kit-$P11_KIT_VERSION.tar.gz && \
-		tar xvzf p11-kit-$P11_KIT_VERSION.tar.gz                                                                     && \
-		rm -f p11-kit-$P11_KIT_VERSION.tar.gz
-fi
-
-cd p11-kit-$P11_KIT_VERSION && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
+wget -c https://github.com/p11-glue/p11-kit/releases/download/$P11_KIT_VERSION/p11-kit-$P11_KIT_VERSION.tar.gz && \
+	tar xvzf p11-kit-$P11_KIT_VERSION.tar.gz                                                                     && \
+	rm -f p11-kit-$P11_KIT_VERSION.tar.gz                                                                        && \
+	cd p11-kit-$P11_KIT_VERSION && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
 
 
 topic "Installing Unbound"
-if
-	[ ! -d "$BUILDS_CACHE_DIR/unbound-1.9.4" ]
-then
-	wget -c https://nlnetlabs.nl/downloads/unbound/unbound-1.9.4.tar.gz && \
-		tar xvzf unbound-1.9.4.tar.gz                                     && \
-		rm -f unbound-1.9.4.tar.gz
-fi
-
-cd unbound-1.9.4 && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
+wget -c https://nlnetlabs.nl/downloads/unbound/unbound-1.9.4.tar.gz && \
+	tar xvzf unbound-1.9.4.tar.gz                                     && \
+	rm -f unbound-1.9.4.tar.gz                                        && \
+	cd unbound-1.9.4                                                  && \
+	./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
 
 
 # topic "Installing Autogen"
