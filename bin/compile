@@ -114,8 +114,11 @@ wget -c https://nlnetlabs.nl/downloads/unbound/unbound-$UNBOUND_VERSION.tar.gz &
 # cd autogen-5.18.7 && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
 #https://trac.macports.org/ticket/54112
 
-rm -r $BUILD_DIR/.apt/usr/lib/gcc/x86_64-linux-gnu/7
-ln -s $BUILD_DIR/usr/lib/gcc/x86_64-linux-gnu/7 $BUILD_DIR/.apt/usr/lib/gcc/x86_64-linux-gnu
+rm -r $BUILD_DIR/.apt/usr/lib/gcc/x86_64-linux-gnu/*
+for x in /usr/lib/gcc/x86_64-linux-gnu/*
+do
+	ln -s "$x" $BUILD_DIR/.apt/usr/lib/gcc/x86_64-linux-gnu
+fi
 
 
 topic "Installing GnuTLS"
