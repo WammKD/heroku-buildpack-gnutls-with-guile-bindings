@@ -13,6 +13,7 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 NETTLE_VERSION=3.6
 P11_KIT_VERSION=0.23.20
+UNBOUND_VERSION=1.10.1
 LIBTASN1_VERSION=4.16.0
 
 function indent() {
@@ -94,10 +95,10 @@ wget -c https://github.com/p11-glue/p11-kit/releases/download/$P11_KIT_VERSION/p
 
 
 topic "Installing Unbound"
-wget -c https://nlnetlabs.nl/downloads/unbound/unbound-1.9.4.tar.gz && \
-	tar xvzf unbound-1.9.4.tar.gz                                     && \
-	rm -f unbound-1.9.4.tar.gz                                        && \
-	cd unbound-1.9.4                                                  && \
+wget -c https://nlnetlabs.nl/downloads/unbound/unbound-$UNBOUND_VERSION.tar.gz && \
+	tar xvzf unbound-$UNBOUND_VERSION.tar.gz                                     && \
+	rm -f unbound-$UNBOUND_VERSION.tar.gz                                        && \
+	cd unbound-$UNBOUND_VERSION                                                  && \
 	./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
 
 
