@@ -115,6 +115,11 @@ wget -c https://nlnetlabs.nl/downloads/unbound/unbound-$UNBOUND_VERSION.tar.gz &
 #https://trac.macports.org/ticket/54112
 
 
+topic "FUCKERSHIT"
+topic "$(ls -A $BUILD_DIR/.apt/usr/lib)"
+topic "$(ls -A $BUILD_DIR/.apt/usr/lib/gcc)"
+topic "$(ls -A $BUILD_DIR/.apt/usr/lib/gcc/x86_64-linux-gnu/7)"
+
 topic "Installing GnuTLS"
 wget -c https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.14.tar.xz && \
 	tar xJf gnutls-3.6.14.tar.xz                                            && \
