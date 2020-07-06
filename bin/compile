@@ -11,9 +11,9 @@ set -ex
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 BUILD_DIR=$1
 CACHE_DIR=$2
-NETTLE_VERSION=3.4.1
-P11_KIT_VERSION=0.23.15
-LIBTASN1_VERSION=4.13
+NETTLE_VERSION=3.6
+P11_KIT_VERSION=0.23.20
+LIBTASN1_VERSION=4.16.0
 
 function indent() {
 	c='s/^/       /'
