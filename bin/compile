@@ -115,6 +115,10 @@ wget -c https://nlnetlabs.nl/downloads/unbound/unbound-$UNBOUND_VERSION.tar.gz &
 #https://trac.macports.org/ticket/54112
 
 
+cd $BUILD_DIR/.apt/usr/lib/gcc/x86_64-linux-gnu/7/
+ln -s $BUILD_DIR/.apt/usr/lib/gcc/x86_64-linux-gnu/7/32/* .
+cd /tmp
+
 topic "FUCKERSHIT"
 topic "$(ls -A $BUILD_DIR/.apt/usr/lib)"
 topic "$(ls -A $BUILD_DIR/.apt/usr/lib/gcc)"
