@@ -77,11 +77,21 @@ mkdir -p $BUILDS_CACHE_DIR
 cd $BUILDS_CACHE_DIR
 
 topic "Installing Nettle"
-wget -c https://ftp.gnu.org/gnu/nettle/nettle-$NETTLE_VERSION.tar.gz && \
-	tar xvzf nettle-$NETTLE_VERSION.tar.gz                             && \
-	rm -f nettle-$NETTLE_VERSION.tar.gz                                && \
-	cd nettle-$NETTLE_VERSION                                          && \
-	./configure --prefix=$BUILD_DIR/.apt/usr && make && make install && cd ..
+if
+	[ -d $BUILDS_CACHE_DIR/nettle-$NETTLE_VERSION ]
+then
+	cd nettle-$NETTLE_VERSION
+
+	make install
+else
+	wget -c https://ftp.gnu.org/gnu/nettle/nettle-$NETTLE_VERSION.tar.gz && \
+		tar xvzf nettle-$NETTLE_VERSION.tar.gz                             && \
+		rm -f nettle-$NETTLE_VERSION.tar.gz                                && \
+		cd nettle-$NETTLE_VERSION                                          && \
+		./configure --prefix=$BUILD_DIR/.apt/usr && make && make install
+fi
+
+cd ..
 
 
 topic "Installing libtasn1"
