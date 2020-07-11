@@ -35,8 +35,6 @@ function topic() {
 
 
 
-BUILDS_CACHE_DIR="$CACHE_DIR/gnutls-builds"
-
 # Store which STACK we are running on in the cache to bust the cache if it changes
 if [ -f $CACHE_DIR/.apt/STACK ]; then
   CACHED_STACK=$(cat "$CACHE_DIR/.apt/STACK")
@@ -73,49 +71,58 @@ export CPPFLAGS="-isystem /usr/lib/gcc/x86_64-linux-gnu/7/include"
 
 
 
-cd /tmp
+if
+	[ -f $CACHE_DIR/.apt/usr/share/guile/site/3.0/gnutls ]
+then
+	rsync -a $CACHE_DIR/.apt/ $BUILD_DIR/.apt/
+else
+	cd /tmp
 
-topic "Installing Nettle"
-wget -c https://ftp.gnu.org/gnu/nettle/nettle-$NETTLE_VERSION.tar.gz && \
-	tar xvzf nettle-$NETTLE_VERSION.tar.gz                             && \
-	rm -f nettle-$NETTLE_VERSION.tar.gz                                && \
-	cd nettle-$NETTLE_VERSION                                          && \
-	./configure --prefix=$BUILD_DIR/.apt/usr && make && make install   && cd ..
-
-
-topic "Installing libtasn1"
-wget -c https://ftp.gnu.org/gnu/libtasn1/libtasn1-$LIBTASN1_VERSION.tar.gz  && \
-	tar xvzf libtasn1-$LIBTASN1_VERSION.tar.gz                                && \
-	rm -f libtasn1-$LIBTASN1_VERSION.tar.gz                                   && \
-	cd libtasn1-$LIBTASN1_VERSION                                             && \
-	./configure --prefix=$BUILD_DIR/.apt/usr && make && make install          && cd ..
+	topic "Installing Nettle"
+	wget -c https://ftp.gnu.org/gnu/nettle/nettle-$NETTLE_VERSION.tar.gz && \
+		tar xvzf nettle-$NETTLE_VERSION.tar.gz                             && \
+		rm -f nettle-$NETTLE_VERSION.tar.gz                                && \
+		cd nettle-$NETTLE_VERSION                                          && \
+		./configure --prefix=$BUILD_DIR/.apt/usr && make && make install   && cd ..
 
 
-topic "Installing p11-kit"
-wget -c https://github.com/p11-glue/p11-kit/releases/download/$P11_KIT_VERSION/p11-kit-$P11_KIT_VERSION.tar.gz && \
-	tar xvzf p11-kit-$P11_KIT_VERSION.tar.gz                                                                     && \
-	rm -f p11-kit-$P11_KIT_VERSION.tar.gz                                                                        && \
-	cd p11-kit-$P11_KIT_VERSION && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make install              && cd ..
+	topic "Installing libtasn1"
+	wget -c https://ftp.gnu.org/gnu/libtasn1/libtasn1-$LIBTASN1_VERSION.tar.gz  && \
+		tar xvzf libtasn1-$LIBTASN1_VERSION.tar.gz                                && \
+		rm -f libtasn1-$LIBTASN1_VERSION.tar.gz                                   && \
+		cd libtasn1-$LIBTASN1_VERSION                                             && \
+		./configure --prefix=$BUILD_DIR/.apt/usr && make && make install          && cd ..
 
 
-topic "Installing Unbound"
-wget -c https://nlnetlabs.nl/downloads/unbound/unbound-$UNBOUND_VERSION.tar.gz && \
-	tar xvzf unbound-$UNBOUND_VERSION.tar.gz                                     && \
-	rm -f unbound-$UNBOUND_VERSION.tar.gz                                        && \
-	cd unbound-$UNBOUND_VERSION                                                  && \
-	./configure --prefix=$BUILD_DIR/.apt/usr && make && make install             && cd ..
+	topic "Installing p11-kit"
+	wget -c https://github.com/p11-glue/p11-kit/releases/download/$P11_KIT_VERSION/p11-kit-$P11_KIT_VERSION.tar.gz && \
+		tar xvzf p11-kit-$P11_KIT_VERSION.tar.gz                                                                     && \
+		rm -f p11-kit-$P11_KIT_VERSION.tar.gz                                                                        && \
+		cd p11-kit-$P11_KIT_VERSION && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make install              && cd ..
 
 
-rm -r $BUILD_DIR/.apt/usr/lib/gcc/x86_64-linux-gnu/*
-for x in /usr/lib/gcc/x86_64-linux-gnu/*
-do
-	ln -s "$x" $BUILD_DIR/.apt/usr/lib/gcc/x86_64-linux-gnu
-done
+	topic "Installing Unbound"
+	wget -c https://nlnetlabs.nl/downloads/unbound/unbound-$UNBOUND_VERSION.tar.gz && \
+		tar xvzf unbound-$UNBOUND_VERSION.tar.gz                                     && \
+		rm -f unbound-$UNBOUND_VERSION.tar.gz                                        && \
+		cd unbound-$UNBOUND_VERSION                                                  && \
+		./configure --prefix=$BUILD_DIR/.apt/usr && make && make install             && cd ..
 
 
-topic "Installing GnuTLS"
-wget -c https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.14.tar.xz && \
-	tar xJf gnutls-3.6.14.tar.xz                                            && \
-	rm -f gnutls-3.6.14.tar.xz                                              && \
-	cd gnutls-3.6.14                                                        && \
-	./configure --prefix=$BUILD_DIR/.apt/usr --enable-guile GUILE="$BUILD_DIR/.apt/usr/bin/guile" && make && make install && cd ..
+	rm -r $BUILD_DIR/.apt/usr/lib/gcc/x86_64-linux-gnu/*
+	for x in /usr/lib/gcc/x86_64-linux-gnu/*
+	do
+		ln -s "$x" $BUILD_DIR/.apt/usr/lib/gcc/x86_64-linux-gnu
+	done
+
+
+	topic "Installing GnuTLS"
+	wget -c https://www.gnupg.org/ftp/gcrypt/gnutls/v3.6/gnutls-3.6.14.tar.xz && \
+		tar xJf gnutls-3.6.14.tar.xz                                            && \
+		rm -f gnutls-3.6.14.tar.xz                                              && \
+		cd gnutls-3.6.14                                                        && \
+		./configure --prefix=$BUILD_DIR/.apt/usr --enable-guile GUILE="$BUILD_DIR/.apt/usr/bin/guile" && make && make install && cd ..
+
+
+	cp -r $BUILD_DIR/.apt/* $CACHE_DIR/.apt/
+fi
