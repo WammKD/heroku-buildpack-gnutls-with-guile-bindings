@@ -73,7 +73,8 @@ export CPPFLAGS="-isystem /usr/lib/gcc/x86_64-linux-gnu/7/include"
 
 
 
-cd /tmp
+mkdir -p $BUILDS_CACHE_DIR
+cd $BUILDS_CACHE_DIR
 
 topic "Installing Nettle"
 wget -c https://ftp.gnu.org/gnu/nettle/nettle-$NETTLE_VERSION.tar.gz && \
