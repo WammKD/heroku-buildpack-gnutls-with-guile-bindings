@@ -73,7 +73,7 @@ export CPPFLAGS="-isystem /usr/lib/gcc/x86_64-linux-gnu/7/include"
 
 
 if
-	[ ! -f $CACHE_DIR/.apt/usr/bin/art ]
+	[ ! -f $CACHE_DIR/.apt/bin/art ]
 then
 	cd /tmp
 
