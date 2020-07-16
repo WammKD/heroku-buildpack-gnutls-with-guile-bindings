@@ -94,9 +94,9 @@ then
 
 
 	topic "Installing p11-kit"
-	wget -c https://github.com/p11-glue/p11-kit/releases/download/$P11_KIT_VERSION/p11-kit-$P11_KIT_VERSION.tar.gz && \
-		tar xvzf p11-kit-$P11_KIT_VERSION.tar.gz                                                                     && \
-		rm -f p11-kit-$P11_KIT_VERSION.tar.gz                                                                        && \
+	wget -c https://github.com/p11-glue/p11-kit/releases/download/$P11_KIT_VERSION/p11-kit-$P11_KIT_VERSION.tar.xz && \
+		tar xJf p11-kit-$P11_KIT_VERSION.tar.xz                                                                      && \
+		rm -f p11-kit-$P11_KIT_VERSION.tar.xz                                                                        && \
 		cd p11-kit-$P11_KIT_VERSION && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make install              && cd ..
 
 
