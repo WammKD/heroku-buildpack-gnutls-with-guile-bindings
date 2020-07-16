@@ -36,12 +36,6 @@ function topic() {
 
 
 
-if
-	[ -f $CACHE_DIR/.apt/bin/art ]
-then
-	rm -f $CACHE_DIR/.apt/bin/art
-fi
-
 # Store which STACK we are running on in the cache to bust the cache if it changes
 if [ -f $CACHE_DIR/.apt/STACK ]; then
   CACHED_STACK=$(cat "$CACHE_DIR/.apt/STACK")
