@@ -72,53 +72,49 @@ export CPPFLAGS="-isystem /usr/lib/gcc/x86_64-linux-gnu/7/include"
 
 
 
-if
-	[ -f $CACHE_DIR/.apt/bin/art ]
-then
-	cd /tmp
+cd /tmp
 
-	topic "Installing Nettle"
-	wget -c https://ftp.gnu.org/gnu/nettle/nettle-$NETTLE_VERSION.tar.gz && \
-		tar xvzf nettle-$NETTLE_VERSION.tar.gz                             && \
-		rm -f nettle-$NETTLE_VERSION.tar.gz                                && \
-		cd nettle-$NETTLE_VERSION                                          && \
-		./configure --prefix=$BUILD_DIR/.apt/usr && make && make install   && cd ..
+topic "Installing Nettle"
+wget -c https://ftp.gnu.org/gnu/nettle/nettle-$NETTLE_VERSION.tar.gz && \
+	tar xvzf nettle-$NETTLE_VERSION.tar.gz                             && \
+	rm -f nettle-$NETTLE_VERSION.tar.gz                                && \
+	cd nettle-$NETTLE_VERSION                                          && \
+	./configure --prefix=$BUILD_DIR/.apt/usr && make && make install   && cd ..
 
 
-	topic "Installing libtasn1"
-	wget -c https://ftp.gnu.org/gnu/libtasn1/libtasn1-$LIBTASN1_VERSION.tar.gz  && \
-		tar xvzf libtasn1-$LIBTASN1_VERSION.tar.gz                                && \
-		rm -f libtasn1-$LIBTASN1_VERSION.tar.gz                                   && \
-		cd libtasn1-$LIBTASN1_VERSION                                             && \
-		./configure --prefix=$BUILD_DIR/.apt/usr && make && make install          && cd ..
+topic "Installing libtasn1"
+wget -c https://ftp.gnu.org/gnu/libtasn1/libtasn1-$LIBTASN1_VERSION.tar.gz  && \
+	tar xvzf libtasn1-$LIBTASN1_VERSION.tar.gz                                && \
+	rm -f libtasn1-$LIBTASN1_VERSION.tar.gz                                   && \
+	cd libtasn1-$LIBTASN1_VERSION                                             && \
+	./configure --prefix=$BUILD_DIR/.apt/usr && make && make install          && cd ..
 
 
-	topic "Installing p11-kit"
-	wget -c https://github.com/p11-glue/p11-kit/releases/download/$P11_KIT_VERSION/p11-kit-$P11_KIT_VERSION.tar.xz && \
-		tar xJf p11-kit-$P11_KIT_VERSION.tar.xz                                                                      && \
-		rm -f p11-kit-$P11_KIT_VERSION.tar.xz                                                                        && \
-		cd p11-kit-$P11_KIT_VERSION && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make install              && cd ..
+topic "Installing p11-kit"
+wget -c https://github.com/p11-glue/p11-kit/releases/download/$P11_KIT_VERSION/p11-kit-$P11_KIT_VERSION.tar.xz && \
+	tar xJf p11-kit-$P11_KIT_VERSION.tar.xz                                                                      && \
+	rm -f p11-kit-$P11_KIT_VERSION.tar.xz                                                                        && \
+	cd p11-kit-$P11_KIT_VERSION && ./configure --prefix=$BUILD_DIR/.apt/usr && make && make install              && cd ..
 
 
-	topic "Installing Unbound"
-	wget -c https://nlnetlabs.nl/downloads/unbound/unbound-$UNBOUND_VERSION.tar.gz && \
-		tar xvzf unbound-$UNBOUND_VERSION.tar.gz                                     && \
-		rm -f unbound-$UNBOUND_VERSION.tar.gz                                        && \
-		cd unbound-$UNBOUND_VERSION                                                  && \
-		./configure --prefix=$BUILD_DIR/.apt/usr && make && make install             && cd ..
+topic "Installing Unbound"
+wget -c https://nlnetlabs.nl/downloads/unbound/unbound-$UNBOUND_VERSION.tar.gz && \
+	tar xvzf unbound-$UNBOUND_VERSION.tar.gz                                     && \
+	rm -f unbound-$UNBOUND_VERSION.tar.gz                                        && \
+	cd unbound-$UNBOUND_VERSION                                                  && \
+	./configure --prefix=$BUILD_DIR/.apt/usr && make && make install             && cd ..
 
 
-	rm -r $BUILD_DIR/.apt/usr/lib/gcc/x86_64-linux-gnu/*
-	for x in /usr/lib/gcc/x86_64-linux-gnu/*
-	do
-		ln -s "$x" $BUILD_DIR/.apt/usr/lib/gcc/x86_64-linux-gnu
-	done
+rm -r $BUILD_DIR/.apt/usr/lib/gcc/x86_64-linux-gnu/*
+for x in /usr/lib/gcc/x86_64-linux-gnu/*
+do
+	ln -s "$x" $BUILD_DIR/.apt/usr/lib/gcc/x86_64-linux-gnu
+done
 
 
-	topic "Installing GnuTLS"
-	wget -c https://www.gnupg.org/ftp/gcrypt/gnutls/v${GNUTLS_VERSION%.*}/gnutls-$GNUTLS_VERSION.tar.xz && \
-		tar xJf gnutls-$GNUTLS_VERSION.tar.xz                                                             && \
-		rm -f gnutls-$GNUTLS_VERSION.tar.xz                                                               && \
-		cd gnutls-$GNUTLS_VERSION                                                                         && \
-		./configure --prefix=$BUILD_DIR/.apt/usr --enable-guile GUILE="$BUILD_DIR/.apt/usr/bin/guile" && make && make install && cd ..
-fi
+topic "Installing GnuTLS"
+wget -c https://www.gnupg.org/ftp/gcrypt/gnutls/v${GNUTLS_VERSION%.*}/gnutls-$GNUTLS_VERSION.tar.xz && \
+	tar xJf gnutls-$GNUTLS_VERSION.tar.xz                                                             && \
+	rm -f gnutls-$GNUTLS_VERSION.tar.xz                                                               && \
+	cd gnutls-$GNUTLS_VERSION                                                                         && \
+	./configure --prefix=$BUILD_DIR/.apt/usr --enable-guile GUILE="$BUILD_DIR/.apt/usr/bin/guile" && make && make install && cd ..
